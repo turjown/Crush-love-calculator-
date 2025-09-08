@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crush Love Calculator 😎</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: linear-gradient(135deg, #f0f8ff, #ffe4e1);
+      color: #333;
+      overflow-x: hidden;
+    }
+    h1 {
+      margin-bottom: 30px;
+      color: #ff1493;
+    }
+    input, button {
+      padding: 12px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #ff69b4;
+      top: -10px;
+      z-index: 9999;
+      pointer-events: none;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Crush Love Calculator 😎</h1>
+
+  <div id="step1">
+    <input type="text" id="userName" placeholder="Tomar naam likho">
+    <br>
+    <button onclick="nextStep()">Next</button>
+  </div>
+
+  <div id="step2" style="display:none;">
+    <p id="greeting"></p>
+    <input type="text" id="crushName" placeholder="Tomar crush er naam">
+    <br>
+    <button onclick="calculateLove()">Calculate 💖</button>
+  </div>
+
+  <div id="step3" style="display:none;">
+    <p id="loveResult"></p>
+    <p id="funnyMsg"></p>
+  </div>
+
+  <script>
+    function nextStep() {
+      const userName = document.getElementById('userName').value.trim();
+      if(userName === "") {
+        alert("Please enter your name!");
+        return;
+      }
+      document.getElementById('greeting').innerText = `Hi ${userName}! Tumi tomar crush er naam bolo. Tumi koto ta valobasho, ami calculate kore dite parbo 😎`;
+      document.getElementById('step1').style.display = "none";
+      document.getElementById('step2').style.display = "block";
+    }
+
+    function calculateLove() {
+      const crushName = document.getElementById('crushName').value.trim();
+      if(crushName === "") {
+        alert("Please enter your crush's name!");
+        return;
+      }
+
+      const lovePercent = Math.floor(Math.random() * 101);
+
+      document.getElementById('step2').style.display = "none";
+      document.getElementById('step3').style.display = "block";
+
+      document.getElementById('loveResult').innerText = `💖 Tumar love for ${crushName} is ${lovePercent}% 💖`;
+      document.getElementById('funnyMsg').innerText = `lol 🤣 Your crush name (${crushName}) has been sent to turjown!`;
+
+      launchConfetti();
+    }
+
+    function launchConfetti() {
+      for(let i = 0; i < 50; i++) {
+        let confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confetti.style.width = confetti.style.height = (Math.random() * 8 + 5) + 'px';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>
